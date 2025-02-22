@@ -1,0 +1,40 @@
+<div class="flex w-screen h-screen justify-center items-center">
+    <div class="w-[400px] h-fit rounded-md bg-gray-300 flex flex-col p-4 items-center space-y-3">
+        <h1 class="text-2xl font-bold">App Contas ADM</h1>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col space-y-2 w-2/3">
+            <div class="flex flex-col space-y-1">
+                <label for="id">Login<small class="text-xs text-red-600">*</small></label>
+                <input name="id" class="rounded-md p-1" type="text" formControlName="id" />
+                <div *ngIf="loginForm.controls['id'].invalid && loginForm.controls['id'].touched">
+                    <small class="text-xs text-red-600" *ngIf="loginForm.controls['id'].hasError('required')">*id é
+                        obrigatório</small>
+                    <small *ngIf="loginForm.controls['id'].hasError('minlength')">*Mínimo 3 caracteres</small>
+                </div>
+            </div>
+            <div class="flex flex-col space-y-1">
+                <label for="password">Senha<small class="text-xs text-red-600">*</small></label>
+                <input name="password" class="rounded-md p-1" type="text" formControlName="password" required="true" />
+                <div *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched">
+                    <small *ngIf="loginForm.controls['password'].hasError('required')">*password é obrigatório</small>
+                    <small *ngIf="loginForm.controls['password'].hasError('minlength')">*Mínimo 3 caracteres</small>
+                </div>
+            </div>
+            <button type="submit" [disabled]="loginForm.invalid || loading" [ngClass]="{
+                'bg-blue-500 hover:bg-blue-600 text-white': !loading,
+                'bg-blue-300 text-gray-100 cursor-not-allowed': loading
+                }" class="px-4 py-2 rounded-md transition flex justify-center items-center gap-2">
+                <svg *ngIf="loading" class="animate-spin h-5 w-5 text-white" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path opacity="0.2" fill-rule="evenodd" clip-rule="evenodd"
+                        d="M12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19ZM12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                        fill="currentColor" />
+                    <path d="M12 22C17.5228 22 22 17.5228 22 12H19C19 15.866 15.866 19 12 19V22Z" fill="currentColor" />
+                    <path d="M2 12C2 6.47715 6.47715 2 12 2V5C8.13401 5 5 8.13401 5 12H2Z" fill="currentColor" />
+                </svg>
+                <span>{{ loading ? 'Carregando...' : 'Entrar' }}</span>
+            </button>
+        </form>
+        <div *ngIf="errorMes" class="error">
+            <span class="text-sm text-red-500">{{ errorMes }}</span>
+        </div>
+    </div>
+</div>

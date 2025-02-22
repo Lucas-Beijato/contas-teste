@@ -1,0 +1,44 @@
+<div class="w-screen h-screen flex flex-row">
+    <div class="w-[60px] h-screen bg-white border-r border-gray-400 flex flex-col items-center justify-between py-3">
+        <div class="flex flex-col items-center space-y-1">
+            <a href="/dash/users"
+                class="text-green-500 border border-green-500 p-1 rounded-md hover:bg-green-500 hover:text-white duration-150"
+                title="Lista de usuários">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M8 11C10.2091 11 12 9.20914 12 7C12 4.79086 10.2091 3 8 3C5.79086 3 4 4.79086 4 7C4 9.20914 5.79086 11 8 11ZM8 9C9.10457 9 10 8.10457 10 7C10 5.89543 9.10457 5 8 5C6.89543 5 6 5.89543 6 7C6 8.10457 6.89543 9 8 9Z"
+                        fill="currentColor" />
+                    <path
+                        d="M11 14C11.5523 14 12 14.4477 12 15V21H14V15C14 13.3431 12.6569 12 11 12H5C3.34315 12 2 13.3431 2 15V21H4V15C4 14.4477 4.44772 14 5 14H11Z"
+                        fill="currentColor" />
+                    <path d="M22 11H16V13H22V11Z" fill="currentColor" />
+                    <path d="M16 15H22V17H16V15Z" fill="currentColor" />
+                    <path d="M22 7H16V9H22V7Z" fill="currentColor" />
+                </svg>
+            </a>
+            <!-- <a href="/dash/deactivated" class="text-orange-500 border border-orange-500 p-1 rounded-md hover:bg-orange-500 hover:text-white duration-150" title="Usuários inativos">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M8.46457 14.1213C8.07404 14.5118 8.07404 15.145 8.46457 15.5355C8.85509 15.926 9.48825 15.926 9.87878 15.5355L15.5356 9.87862C15.9262 9.4881 15.9262 8.85493 15.5356 8.46441C15.1451 8.07388 14.5119 8.07388 14.1214 8.46441L8.46457 14.1213Z"
+                        fill="currentColor" />
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M6.34315 17.6569C9.46734 20.781 14.5327 20.781 17.6569 17.6569C20.781 14.5327 20.781 9.46734 17.6569 6.34315C14.5327 3.21895 9.46734 3.21895 6.34315 6.34315C3.21895 9.46734 3.21895 14.5327 6.34315 17.6569ZM16.2426 16.2426C13.8995 18.5858 10.1005 18.5858 7.75736 16.2426C5.41421 13.8995 5.41421 10.1005 7.75736 7.75736C10.1005 5.41421 13.8995 5.41421 16.2426 7.75736C18.5858 10.1005 18.5858 13.8995 16.2426 16.2426Z"
+                        fill="currentColor" />
+                </svg>
+            </a> -->
+        </div>
+        <button (click)="logout()"
+            class="p-1 rounded-md border border-red-500 hover:bg-red-500 text-red-500 duration-150 hover:text-white">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M8.51428 20H4.51428C3.40971 20 2.51428 19.1046 2.51428 18V6C2.51428 4.89543 3.40971 4 4.51428 4H8.51428V6H4.51428V18H8.51428V20Z"
+                    fill="currentColor" />
+                <path
+                    d="M13.8418 17.385L15.262 15.9768L11.3428 12.0242L20.4857 12.0242C21.038 12.0242 21.4857 11.5765 21.4857 11.0242C21.4857 10.4719 21.038 10.0242 20.4857 10.0242L11.3236 10.0242L15.304 6.0774L13.8958 4.6572L7.5049 10.9941L13.8418 17.385Z"
+                    fill="currentColor" />
+            </svg></button>
+    </div>
+    <div class="w-full h-screen p-1">
+        <ng-content></ng-content>
+    </div>
+</div>
