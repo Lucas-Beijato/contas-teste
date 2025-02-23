@@ -5,6 +5,7 @@ import { UsersComponent } from './pages/dash/users/users.component';
 import { EditComponent } from './pages/dash/edit/edit.component';
 import { authGuard } from './services/auth/auth.guard';
 import { loginGuard } from './pages/login/login.guard';
+import { NewUserComponent } from './pages/dash/new-user/new-user.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -12,9 +13,10 @@ export const routes: Routes = [
     {
         path: 'dash', component: DashComponent, canActivate: [authGuard],
         children: [
-            { path: '', redirectTo: 'users', pathMatch: 'full'},
+            { path: '', redirectTo: 'users', pathMatch: 'full' },
             { path: 'users', component: UsersComponent },
             { path: 'edit/:id', component: EditComponent },
+            { path: 'new-user', component: NewUserComponent }
         ]
     }
 ];

@@ -1,0 +1,50 @@
+<div
+    class=" flex justify-center items-center flex-col w-full h-full border border-gray-400 rounded-md p-3 overflow-y-auto overflow-x-clip space-y-6">
+
+    <div class="w-[400px] w-min-[200px] p-4 rounded-md flex flex-col bg-gray-100">
+        <h1 class="text-xl font-bold">Criar usuário:</h1>
+        <div class="space-y-3">
+            <form class="flex flex-col space-y-3" [formGroup]="newUserForm" (ngSubmit)="CreateNewUser()">
+
+                <div class="flex flex-col">
+                    <div class="flex flex-col justify-center">
+                        <label class="font-semibold" for="id">Id:</label>
+                        <input class="border border-black rounded-md text-black p-1" type="text" id="id"
+                            formControlName="id">
+                    </div>
+                    <div *ngIf="newUserForm.controls['id'].invalid && newUserForm.controls['id'].touched">
+                        <small *ngIf="newUserForm.controls['id'].hasError('minlength')">Mínimo 3 caracteres</small>
+                    </div>
+                </div>
+
+                <div class="flex flex-col">
+                    <div class="flex flex-col justify-center">
+                        <label class="font-semibold" for="name">Nome:</label>
+                        <input class="border border-black rounded-md text-black p-1" type="text" id="name"
+                            formControlName="name">
+                    </div>
+                    <div *ngIf="newUserForm.controls['name'].invalid && newUserForm.controls['name'].touched">
+                        <small *ngIf="newUserForm.controls['name'].hasError('minlength')">Mínimo 3 caracteres</small>
+                    </div>
+                </div>
+
+                <div class="flex flex-col">
+                    <div class="flex flex-col justify-center">
+                        <label class="font-semibold" for="password">Senha:</label>
+                        <input class="border border-black rounded-md text-black p-1" type="text" id="password"
+                            formControlName="password">
+                    </div>
+                    <div *ngIf="newUserForm.controls['password'].invalid && newUserForm.controls['password'].touched">
+                        <small *ngIf="newUserForm.controls['password'].hasError('minlength')">Mínimo 3
+                            caracteres</small>
+                    </div>
+                </div>
+                <div class="flex flex-row mt-5 justify-end">
+                    <button type="submit"
+                        class="bg-blue-500 p-2 rounded-md text-white hover:bg-blue-600 duration-150">Criar</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

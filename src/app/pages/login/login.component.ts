@@ -20,17 +20,13 @@ export class LoginComponent {
     password: new FormControl('', [Validators.required, Validators.minLength(3)]),
   });
 
-  constructor (private auth: AuthService) {}
+  constructor(private auth: AuthService) { }
 
   onSubmit() {
     if (this.loginForm.value.id && this.loginForm.value.password) {
       this.loading = true;
-      this.auth.login(this.loginForm.value.id, this.loginForm.value.password).subscribe({
-        next: () => {},
-        error: (error) => { this.loading = false, this.errorMes = "Erro interno no processo de login", console.log(error) },
-        complete: () => { this.loading = false }
-      })
+      this.auth.login(this.loginForm.value.id, this.loginForm.value.password)
     }
   }
-  
+
 }

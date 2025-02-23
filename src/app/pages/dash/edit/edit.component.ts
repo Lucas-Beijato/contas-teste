@@ -17,7 +17,8 @@ export class EditComponent implements OnInit {
 
   editForm = new FormGroup({
     name: new FormControl(this.user.name, [Validators.minLength(3)]),
-    is_active: new FormControl(this.user.is_active)
+    is_active: new FormControl(this.user.is_active),
+    password: new FormControl('')
   })
 
   constructor(
@@ -28,7 +29,7 @@ export class EditComponent implements OnInit {
   ngOnInit(): void {
     this.loadingUser = true;
     const id = String(this.route.snapshot.paramMap.get('id'));
-    this.editService.getUserById(id).subscribe({
+    this.editService.GetUserById(id).subscribe({
       next: (res) => {
         if ('error' in res.body!) {
           console.log(res.body.error)
@@ -44,5 +45,17 @@ export class EditComponent implements OnInit {
         this.loadingUser = false;
       }
     })
+  }
+
+  saveChanges() {
+    if (this.editForm.value.name && this.editForm.value.is_active !== null && this.editForm.value.is_active !== undefined) {
+      this.editService.SaveChanges(this.user.id, this.editForm.value.name, this.editForm.value.is_active, this.editForm.value.password).subscribe({
+        next: (data) => {
+          console.log(data)
+        },
+        error: (error) => { console.log(error) },
+        complete: () => { }
+      })
+    }
   }
 }

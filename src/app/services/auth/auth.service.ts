@@ -17,11 +17,11 @@ export class AuthService {
     private api: ApiClientService
   ) { }
 
-  login(id: string, password: string): Observable<string> {
+  login(id: string, password: string) {
 
-    let resp: string;
+    let resp: string = "";
 
-    this.api.login(id, password).subscribe((res) => {
+    this.api.login(id, password).subscribe(async (res) => {
 
       if ('error' in res.body!) {
         switch (res.status) {
@@ -46,11 +46,18 @@ export class AuthService {
         const today = new Date()
         const tokenTime = new Date(today.getFullYear(), today.getMonth(), today.getDate(), (today.getHours() + 1), today.getMinutes(), today.getSeconds())
         this.cookies.set('contasToken', res.body.data.token, { expires: tokenTime, path: '/' });
-        this.router.navigate(['/dash'])
-      }
-    });;
 
-    return new Observable()
+        if (this.cookies.get('contasToken')) {
+          this.router.navigate(['/dash'])
+        }
+
+      }
+    })
+
+    console.log(resp)
+
+    // Preciso implementar o controle para o front, passar através de subscribers
+    // return new Observable()
   }
 
   async logout() {
