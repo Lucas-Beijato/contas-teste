@@ -43,20 +43,7 @@ export class LoginComponent {
             const today = new Date()
             const tokenTime = new Date(today.getFullYear(), today.getMonth(), today.getDate(), (today.getHours() + 1), today.getMinutes(), today.getSeconds())
             this.cookies.set('contasToken', res.body.data.token, { expires: tokenTime, path: '/' });
-
-
-
-            setTimeout(() => {
-              this.router.navigate(['/dash']);
-            }, 100); // Pequeno atraso para garantir que o cookie foi gravado
-
-
-            // const checkCookie = setInterval(() => {
-            //   if (this.cookies.get('contasToken')) {
-            //     clearInterval(checkCookie);
-            //     this.router.navigate(['/dash']);
-            //   }
-            // }, 10);
+            this.router.navigate(['/dash']);
           }
 
           this.loading = false
