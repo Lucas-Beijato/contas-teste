@@ -1,29 +1,60 @@
-<div class="flex w-screen h-screen justify-center items-center">
-    <div class="w-[400px] h-fit rounded-md bg-gray-300 flex flex-col p-4 items-center space-y-3">
+<div class="flex w-screen h-screen justify-center items-center p-2">
+    <div class="w-full max-w-[400px] h-fit rounded-md bg-gray-100 flex flex-col p-4 items-center space-y-3">
         <h1 class="text-2xl font-bold">App Contas ADM</h1>
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col space-y-2 w-2/3">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col space-y-2 w-full">
             <div class="flex flex-col space-y-1">
-                <label for="id">Login<small class="text-xs text-red-600">*</small></label>
+                <label class="font-semibold" for="id">Id<small class="text-xs text-red-600">*</small></label>
                 <input name="id" class="rounded-md p-1" type="text" formControlName="id" />
                 <div *ngIf="loginForm.controls['id'].invalid && loginForm.controls['id'].touched">
                     <small class="text-xs text-red-600" *ngIf="loginForm.controls['id'].hasError('required')">*id é
                         obrigatório</small>
-                    <small *ngIf="loginForm.controls['id'].hasError('minlength')">*Mínimo 3 caracteres</small>
+                    <small class="text-xs text-red-600" *ngIf="loginForm.controls['id'].hasError('minlength')">*Mínimo 3
+                        caracteres</small>
                 </div>
             </div>
             <div class="flex flex-col space-y-1">
-                <label for="password">Senha<small class="text-xs text-red-600">*</small></label>
-                <input name="password" class="rounded-md p-1" type="text" formControlName="password" required="true" />
+                <label class="font-semibold" for="password">Senha<small class="text-xs text-red-600">*</small></label>
+                <div class="flex flex-row space-x-2">
+                    <input name="password" class="rounded-md p-1 w-full" [type]="passVisible ? 'text' : 'password' "
+                        formControlName="password" required="true" />
+                    <button type="button" class="p-2 bg-gray-200 rounded-md duration-150 text-gray-400"
+                        (click)="passVisibility()">
+
+                        <svg *ngIf="passVisible; else hideIcon" xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye">
+                            <path
+                                d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
+                            <circle cx="12" cy="12" r="3" />
+                        </svg>
+
+                        <ng-template class="" #hideIcon>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-eye-off">
+                                <path
+                                    d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49" />
+                                <path d="M14.084 14.158a3 3 0 0 1-4.242-4.242" />
+                                <path
+                                    d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143" />
+                                <path d="m2 2 20 20" />
+                            </svg>
+                        </ng-template>
+                    </button>
+                </div>
                 <div *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched">
-                    <small *ngIf="loginForm.controls['password'].hasError('required')">*password é obrigatório</small>
-                    <small *ngIf="loginForm.controls['password'].hasError('minlength')">*Mínimo 3 caracteres</small>
+                    <small class="text-xs text-red-600"
+                        *ngIf="loginForm.controls['password'].hasError('required')">*senha é obrigatório</small>
+                    <small class="text-xs text-red-600"
+                        *ngIf="loginForm.controls['password'].hasError('minlength')">*Mínimo 3 caracteres</small>
                 </div>
             </div>
             <button type="submit" [disabled]="loginForm.invalid || loading" [ngClass]="{
                 'bg-blue-500 hover:bg-blue-600 text-white': !loading,
                 'bg-blue-300 text-gray-100 cursor-not-allowed': loading
                 }" class="px-4 py-2 rounded-md transition flex justify-center items-center gap-2">
-                <svg *ngIf="loading" class="animate-spin h-5 w-5 text-white" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg *ngIf="loading" class="animate-spin h-5 w-5 text-white" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path opacity="0.2" fill-rule="evenodd" clip-rule="evenodd"
                         d="M12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19ZM12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
                         fill="currentColor" />

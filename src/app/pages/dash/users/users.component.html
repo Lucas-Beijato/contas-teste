@@ -1,20 +1,28 @@
 <div *ngIf="!loading; else loadingTemplate"
-    class="flex flex-col justify-center items-center w-full h-full border border-gray-400 rounded-md p-3 overflow-auto space-y-2">
-    <div class="flex w-[600px] flex-col">
+    class="flex flex-col justify-center items-center w-full h-full border border-gray-400 rounded-md p-3 space-y-2">
+    <div class="flex w-full max-w-[400px] flex-col space-y-3">
         <h1 class="">Lista de clientes ativos:</h1>
         <ul class="space-y-2 w-full">
-            <li class="flex flex-row border border-gray-400 p-2 rounded-md w-full h-fit justify-between items-center"
+            <li class="flex flex-row border border-gray-400 p-2 rounded-md w-full justify-between items-center"
                 *ngFor="let item of userList">
                 <h2 class="pl-2">{{ item?.id }}</h2>
-                <div class="space-x-2">
+                <div class="space-x-2 flex flex-row justify-center items-center">
                     <span *ngIf="item?.is_active; else inativo">
                         <span class="text-green-500">Ativo</span>
                     </span>
                     <ng-template #inativo>
                         <span class="text-red-500">Inativo</span>
                     </ng-template>
-                    <a class="rounded-md bg-gray-400 hover:bg-gray-500 text-white p-1 duration-150"
-                        [routerLink]="['/dash/edit/', item?.id]">Editar</a>
+                    <a class="bg-blue-500 text-white p-1 hover:bg-blue-600 duration-150 rounded-md"
+                        [routerLink]="['/dash/edit/', item?.id]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-user-pen">
+                            <path d="M11.5 15H7a4 4 0 0 0-4 4v2" />
+                            <path
+                                d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z" />
+                            <circle cx="10" cy="7" r="4" />
+                        </svg></a>
                 </div>
             </li>
         </ul>

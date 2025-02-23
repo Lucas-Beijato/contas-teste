@@ -6,7 +6,6 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-dash',
   imports: [MenuComponent, RouterOutlet],
   templateUrl: './dash.component.html',
-  styleUrl: './dash.component.css',
   providers: []
 })
-export class DashComponent {}
+export class DashComponent { }

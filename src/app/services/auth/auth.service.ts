@@ -17,47 +17,8 @@ export class AuthService {
     private api: ApiClientService
   ) { }
 
-  login(id: string, password: string) {
-
-    let resp: string = "";
-
-    this.api.login(id, password).subscribe(async (res) => {
-
-      if ('error' in res.body!) {
-        switch (res.status) {
-          case 400: {
-            resp = 'Usuário ou senha inválidos'
-            break;
-          }
-          case 401: {
-            resp = 'Usuário ou senha inválidos'
-            break;
-          }
-          case 500: {
-            resp = 'Erro interno do servidor'
-            break;
-          }
-          default: { resp = 'Erro desconhecido.' }
-        }
-        console.log(res.body.error)
-      }
-
-      if ('data' in res.body!) {
-        const today = new Date()
-        const tokenTime = new Date(today.getFullYear(), today.getMonth(), today.getDate(), (today.getHours() + 1), today.getMinutes(), today.getSeconds())
-        this.cookies.set('contasToken', res.body.data.token, { expires: tokenTime, path: '/' });
-
-        if (this.cookies.get('contasToken')) {
-          this.router.navigate(['/dash'])
-        }
-
-      }
-    })
-
-    console.log(resp)
-
-    // Preciso implementar o controle para o front, passar através de subscribers
-    // return new Observable()
+  login(id: string, password: string): Observable<HttpResponse<ApiResponseAdm_Type<TokenResponse>>> {
+    return this.api.login(id, password)
   }
 
   async logout() {
