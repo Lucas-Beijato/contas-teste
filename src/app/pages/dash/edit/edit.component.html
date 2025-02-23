@@ -1,3 +1,42 @@
-<div class="w-full h-full border border-gray-400 rounded-md p-3 overflow-auto space-y-2">
-    <h1 class="">Editar usuário:</h1>
+<div
+    class=" flex justify-center items-center flex-col w-full h-full border border-gray-400 rounded-md p-3 overflow-auto space-y-6">
+
+    <div class="p-4 rounded-md flex flex-col bg-gray-100" *ngIf="!loadingUser; else loading">
+        <h1 class="text-xl font-bold">Editar usuário:</h1>
+        <div class="space-y-3">
+            <h2>
+                <span class="font-semibold">Id do usuário:</span>
+                {{ user.id }}
+            </h2>
+
+            <form class="flex flex-col space-y-3" [formGroup]="editForm">
+
+                <div class="flex flex-col">
+                    <div class="flex flex-row space-x-2 justify-center items-center">
+                        <label class="font-semibold" for="nome">Nome:</label>
+                        <input class="border border-black rounded-md text-black p-1" type="text" id="nome"
+                            formControlName="name">
+                    </div>
+                    <div *ngIf="editForm.controls['name'].invalid && editForm.controls['name'].touched">
+                        <small *ngIf="editForm.controls['name'].hasError('minlength')">Mínimo 3 caracteres</small>
+                    </div>
+                </div>
+
+
+                <div class="flex flex-row items-center space-x-2">
+                    <label class="font-semibold" for="is_active">Ativo?:</label>
+                    <input type="checkbox" id="is_active" formControlName="is_active">
+                </div>
+            </form>
+        </div>
+
+        <div class="flex flex-row mt-5 justify-end">
+            <button class="bg-blue-500 p-2 rounded-md text-white hover:bg-blue-600 duration-150">Salvar</button>
+        </div>
+    </div>
+
+    <ng-template #loading>
+        <span>Carregando usuário...</span>
+    </ng-template>
+
 </div>

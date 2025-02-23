@@ -1,6 +1,8 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { ApiClientService } from '../../../services/apiClient/api-client.service';
+import { User_Type } from '../../../types';
 
 @Component({
   selector: 'app-users',
@@ -8,10 +10,31 @@ import { RouterLink } from '@angular/router';
   templateUrl: './users.component.html',
   styleUrl: './users.component.css'
 })
-export class UsersComponent {
-  items = [
-    { id: "a", name: "a", is_active: true },
-    { id: "b", name: "b", is_active: true },
-    { id: "c", name: "c", is_active: false },
-  ]
+export class UsersComponent implements OnInit {
+
+  userList: Array<User_Type> = [];
+  loading: boolean = false;
+
+  constructor(
+    private api: ApiClientService
+  ) { }
+
+  ngOnInit(): void {
+    this.loading = true
+    this.api.getAllUsers().subscribe({
+      next: (res) => {
+        if ('error' in res.body!) {
+          console.log(res.body.error)
+        }
+
+        if ('data' in res.body!) {
+          this.userList = res.body.data.users
+        }
+      },
+      error: (error) => { console.log(error) },
+      complete: () => {
+        this.loading = false;
+      }
+    })
+  }
 }
